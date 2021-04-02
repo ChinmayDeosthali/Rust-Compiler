@@ -3,7 +3,8 @@ use std::fs::File;
 use std::io::prelude::*;
 
 // *************************************************************************************************************************************
-// Author: Chinmay Kulkarni                                                                                                            *
+// Author: Elle Zeeman                                                                                                                 *               
+// Sub-author: Chinmay Kulkarni                                                                                                        *
 // Project: Designing a compiler with Rust                                                                                             *
 // Code Snippet Description: This section of code will accept input from the command line (which will be the path to the input file    *
 //                           which we want to check with our compiler). The code will try to open the file, if the file is opened then *
@@ -26,7 +27,7 @@ fn main() {
             let mut contents = String::new();
             
             match file.read_to_string(&mut contents) {
-                Ok(_) => println!("File Contents\n\n{}", contents),
+                Ok(_) => println!("\n\nFile Contents\n\n{}", contents),
                 Err(why) => panic!("\n\nCould not read the contents of the file at path {} due to {}\n\n", &args[1], why),
             };
  
@@ -35,6 +36,6 @@ fn main() {
         }
  
     } else {
-        println!("Please provide a file name");
+        println!("Please provide a file name!");
     }
 }
