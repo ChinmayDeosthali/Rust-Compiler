@@ -13,7 +13,8 @@ Rust
 
 # How to run
 ###### once the compilation is successful, run the following command
-> cargo run path/to/file/filename.c
+> cargo run path/to/file/filename.cpp
+> eg: > cargo run input_dir/inp1.cpp
 ###### The above command will automatically compile the rust compiler code and then it will run the compiler using filename.c as an input.
 
 ###### Authors
