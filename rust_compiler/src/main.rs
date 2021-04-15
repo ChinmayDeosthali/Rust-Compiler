@@ -1,3 +1,5 @@
+ mod lexical_analysis;
+
 use std::env;
 use std::fs::File;
 use std::io::prelude::*;
@@ -24,12 +26,19 @@ fn main() {
                 Err(why) => panic!("\n\n{}:{}\n\n", why, &args[1]),
             };
  
-            let mut contents = String::new();
+             let mut contents = String::new();
             
+            
+
             match file.read_to_string(&mut contents) {
                 Ok(_) => println!("\n\nFile Contents\n\n{}", contents),
                 Err(why) => panic!("\n\nCould not read the contents of the file at path {} due to {}\n\n", &args[1], why),
             };
+
+            // Release 0.2 changes start.
+            // Call the function "tokenize" for Lexical analysis.
+            lexical_analysis::tokenize(&args[1]);
+            // Release 0.2 changes end.
  
         } else {
             println!("More than required arguments provided:{:?}",args);
