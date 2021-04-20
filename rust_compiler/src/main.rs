@@ -37,7 +37,7 @@ fn main() {
 
             // Release 0.2 changes start.
             // Call the function "tokenize" for Lexical analysis.
-            lexical_analysis::tokenize(&args[1]);
+            let mut _tokens = lexical_analysis::tokenize(&args[1]);
             // Release 0.2 changes end.
  
         } else {
