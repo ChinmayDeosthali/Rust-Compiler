@@ -10,7 +10,7 @@ use std::path::Path;
 //                           analysis in the next release.                                                                             *
 // *************************************************************************************************************************************
 
-pub fn tokenize(input: &str){
+pub fn tokenize(input: &str) -> Vec<String>{
 
     let mut tokens = Vec::new();
     
@@ -323,6 +323,7 @@ pub fn tokenize(input: &str){
             println!{"{}",token};
         }
     }    
+    tokens
 }
 
 fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
