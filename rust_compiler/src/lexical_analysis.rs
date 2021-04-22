@@ -317,11 +317,14 @@ pub fn tokenize(input: &str) -> Vec<String>{
         }
         
         //println!("Tokens: {:?}",tokens);
-        println!("\n\nLEXICAL ANALYSIS OUTPUT:");
-        println!();
-        for token in tokens.iter(){
-            println!{"{}",token};
-        }
+
+        // Release 0.3 changes start
+        // println!("\n\nLEXICAL ANALYSIS OUTPUT:");
+        // println!();
+        // for token in tokens.iter(){
+        //     println!{"{}",token};
+        // }
+        // Release 0.3 changes end
     }    
     tokens
 }
