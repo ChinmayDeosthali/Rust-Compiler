@@ -1,8 +1,10 @@
- mod lexical_analysis;
+mod lexical_analysis;
+mod syntax_analysis;
 
 use std::env;
 use std::fs::File;
 use std::io::prelude::*;
+use std::process;
 
 // *************************************************************************************************************************************
 // Author: Elle Zeeman                                                                                                                 *               
@@ -37,9 +39,22 @@ fn main() {
 
             // Release 0.2 changes start.
             // Call the function "tokenize" for Lexical analysis.
-            let mut _tokens = lexical_analysis::tokenize(&args[1]);
+            let tokens = lexical_analysis::tokenize(&args[1]);
             // Release 0.2 changes end.
- 
+
+            // Release 0.3 changes start.
+            let check_function_flag = syntax_analysis::check_function(tokens.clone());
+            let check_semi_colon_flag = syntax_analysis::check_semi_colon(tokens.clone());
+
+            if check_function_flag && check_semi_colon_flag {
+                println!("\nSending file to parse tree\n");
+            }
+            else {
+                println!("\nCompilation Error.Exiting the program...\n");
+                process::exit(0x0100);
+            }
+
+            // Resease 0.3 changes end.
         } else {
             println!("More than required arguments provided:{:?}",args);
         }
