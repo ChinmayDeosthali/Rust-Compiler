@@ -43,7 +43,7 @@ fn main() {
             // Release 0.2 changes end.
 
             // Release 0.3 changes start.
-            let check_function_flag = syntax_analysis::check_function(tokens.clone());
+            let check_function_flag = syntax_analysis::slice_the_tokens(tokens.clone());
             let check_semi_colon_flag = syntax_analysis::check_semi_colon(tokens.clone());
 
             if check_function_flag && check_semi_colon_flag {
