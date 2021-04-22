@@ -7,16 +7,26 @@
 // *************************************************************************************************************************************
 pub fn check_function(tokens: Vec<std::string::String>) -> bool {
 
-    // *************************************************************************************************************    
+    // create an int array consisting of all the index positions of the EndOfLine elements in the tokens
+    // let mut end_of_line_index: Vec<usize> = Vec::new();
+    // for (index, element) in tokens.iter().enumerate() {
+    //     if element == "EndOfLine" {
+    //         end_of_line_index.push(index);
+    //     }
+    // } 
+    // println!("{:?}",end_of_line_index);
+    // // *************************************************************************************************************    
     // First here we are checking the return-type of the function name consist of following data types: int,float, *
     // char, double, void. If this is satisfied then the returnType flag will be set to true.                      *
     // *************************************************************************************************************
-        let mut return_type_flag = false;
-        for (index, element) in tokens.iter().enumerate() {
-            if element == "int" || element == "float" || element == "char" || element == "double" || element == "void" {
-                return_type_flag = true;
-            }
+    let mut return_type_flag = false;
+    for (index, element) in tokens.iter().enumerate() {
+        if element == "int" || element == "float" || element == "char" || element == "double" || element == "void" {
+            // concatenate the current row and store it in a string array and can be used later
+            println!("{}", index);
+            return_type_flag = true;
         }
+    }
     
     // *************************************************************************************************************    
     // Here we will first check  *

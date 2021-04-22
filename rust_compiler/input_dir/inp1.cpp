@@ -1,16 +1,17 @@
-int print(int in, string msg){
-    if(in < 0){
-        strcpy(msg, " The sum is below zero!");
+int print (int in, string msg) {
+    if (in < 0) {
+        strcpy (msg, " The sum is below zero!");
     }
-    else if(in < 10)
+    else if (in < 10)
     {
-        strcpy(msg, "The sum is a single digit numeric.");
+        strcpy (msg, "The sum is a single digit numeric.");
     }
-    else{
-        strcpy(msg, "The sum is large.");
+    else {
+        strcpy (msg, "The sum is large.");
     }
     return 0;
 }
+
 int main()
 {
     int a, b, c;
