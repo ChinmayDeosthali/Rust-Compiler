@@ -1,4 +1,5 @@
-int print (int in, string msg) {
+int print (int in, string msg) 
+{
     if (in < 0) {
         strcpy (msg, " The sum is below zero!");
     }
