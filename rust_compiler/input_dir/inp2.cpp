@@ -1,4 +1,5 @@
-int compare (int a, int b, string msg) {
+int compare (int a, int b, string msg)
+{
     
     if (a < b) {
         strcpy (msg, " a is less than b");

@@ -44,17 +44,22 @@ fn main() {
 
             // Release 0.3 changes start.
             let check_function_flag = syntax_analysis::slice_the_tokens(tokens.clone());
-            let check_semi_colon_flag = syntax_analysis::check_semi_colon(tokens.clone());
-
-            if check_function_flag && check_semi_colon_flag {
-                println!("\nSending file to parse tree\n");
-            }
-            else {
-                println!("\nCompilation Error.Exiting the program...\n");
+            
+            if !check_function_flag {
+                println!("\nfunction_flag:Compilation Error.Exiting the program...\n");
                 process::exit(0x0100);
             }
-
+            
+            let check_semi_colon_flag = syntax_analysis::check_semi_colon(tokens.clone());
+            
+            if !check_semi_colon_flag {
+                println!("\nsemi_colon_flag:Compilation Error.Exiting the program...");
+                process::exit(0x0100);
+            }
+            
+            println!("Sending file to parse tree..");
             // Resease 0.3 changes end.
+            
         } else {
             println!("More than required arguments provided:{:?}",args);
         }
