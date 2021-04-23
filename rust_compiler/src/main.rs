@@ -42,7 +42,15 @@ fn main() {
             let tokens = lexical_analysis::tokenize(&args[1]);
             // Release 0.2 changes end.
 
-            // Release 0.3 changes start.
+            // Release 0.3 changes start.   
+            // Check if Parentheses are balanced
+            let (check_parentheses_flag,_parenthesis_map) = syntax_analysis::check_if_parentheses_are_balanced(tokens.clone());
+
+            if !check_parentheses_flag{
+                process::exit(0x0100);
+            }
+
+
             let check_function_flag = syntax_analysis::slice_the_tokens(tokens.clone());
             
             if !check_function_flag {
@@ -56,14 +64,7 @@ fn main() {
                 println!("\nsemi_colon_flag:Compilation Error.Exiting the program...");
                 process::exit(0x0100);
             }
-            
-            // Check if Parentheses are balanced
-            let (check_parentheses_flag,_parenthesis_map) = syntax_analysis::check_if_parentheses_are_balanced(tokens.clone());
-
-            if !check_parentheses_flag{
-                process::exit(0x0100);
-            }
-
+         
             println!("Sending file to parse tree..");
             // Resease 0.3 changes end.
             
