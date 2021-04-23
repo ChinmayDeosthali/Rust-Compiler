@@ -57,6 +57,13 @@ fn main() {
                 process::exit(0x0100);
             }
             
+            // Check if Parentheses are balanced
+            let (check_parentheses_flag,_parenthesis_map) = syntax_analysis::check_if_parentheses_are_balanced(tokens.clone());
+
+            if !check_parentheses_flag{
+                process::exit(0x0100);
+            }
+
             println!("Sending file to parse tree..");
             // Resease 0.3 changes end.
             
