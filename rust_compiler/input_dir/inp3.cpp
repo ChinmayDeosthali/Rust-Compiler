@@ -1,4 +1,4 @@
-int checkPosNeg (int a, int b, string msg) {
+int checkPosNeg (int a, int b, char msg) {
     
     if (a>0) {
         if (b>0) {
@@ -21,7 +21,7 @@ int checkPosNeg (int a, int b, string msg) {
 
 void main() {
     int a, b;
-    string msg;
+    char msg;
     scanf("%d%d", &a, &b);
     checkPosNeg(a,b,msg);
 }
