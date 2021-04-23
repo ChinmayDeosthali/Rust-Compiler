@@ -1,3 +1,5 @@
+use std::collections::HashMap;
+
 // *************************************************************************************************************************************
 // Author: Chinmay Kulkarni                                                                                                            *               
 // Project: Designing a compiler with Rust                                                                                             *
@@ -161,4 +163,80 @@ pub fn check_semi_colon(tokens: Vec<std::string::String>) -> bool {
         }
     }
     return true;
+}
+
+// *************************************************************************************************************************************
+// Author: Chinmay Deosthali                                                                                                           *               
+// Project: Designing a compiler with Rust                                                                                             *
+// Code Snippet Description: function check_if_parentheses_are_balanced will accept tokenized vector from the syntax analysis and check*
+//                           if the input cpp file has syntactically balanced parentheses. The parentheses include                     *
+//                           ("{","}","(",")","[","]"). It returns a boolean value indicating if it is balanced or not. Also it        *
+//                           returns a hashmap which maps each opening parenthesis index to a closing parenthesis index in the         *
+//                           tokenized vector.                                                                                         *                                                                                 * 
+// *************************************************************************************************************************************
+pub fn check_if_parentheses_are_balanced(tokens: Vec<String>) -> (bool,HashMap<usize,usize>){
+    let mut parentheses_map = HashMap::new();
+    let mut t = Vec::new();
+    let mut s = Vec::new();
+    let mut temp = Vec::new();
+    let mut flag : bool = true;
+
+
+    for i in 0..tokens.len(){
+        if tokens[i] == "(" || tokens[i] == "[" || tokens[i] == "{" || tokens[i] == ")" || tokens[i] == "]" || tokens[i] == "}"
+        {
+            if tokens[i] == "(" || tokens[i] == "[" || tokens[i] == "{"
+            {
+                s.push(tokens[i].clone());
+                t.push(i);
+                temp.push(tokens[i].clone());
+                continue;
+            }
+
+            if s.len()==0 {
+                flag = false;
+                println!("Syntax error: Parenthesis are not balanced.");
+                return (flag,parentheses_map);
+            }
+
+            if tokens[i]==")"{
+                let t1 = t.pop();
+                parentheses_map.insert(t1.unwrap(), i);
+                let x = s.pop();
+                temp.push(tokens[i].clone());
+                if x.clone().unwrap() == "{" || x.clone().unwrap() == "[" {
+                    flag = false;
+                    println!("Syntax error: Parenthesis are not balanced, missing opening (");
+                    return (flag,parentheses_map);
+                }
+            }
+            else if tokens[i]=="}"{
+                let t1 = t.pop();
+                parentheses_map.insert(t1.unwrap(), i);
+                let x = s.pop();
+                temp.push(tokens[i].clone());
+                if x.clone().unwrap() == "(" || x.clone().unwrap() == "[" {
+                    flag = false;
+                    println!("Syntax error: Parenthesis are not balanced, missing opening Parenthesis");
+                    return (flag,parentheses_map);
+                }
+            }
+            else if tokens[i]=="]"{
+                let t1 = t.pop();
+                parentheses_map.insert(t1.unwrap(), i);
+                let x = s.pop();
+                temp.push(tokens[i].clone());
+                if x.clone().unwrap() == "{" || x.clone().unwrap() == "(" {
+                    flag = false;
+                    println!("Syntax error: Parenthesis are not balanced, missing opening [");
+                    return (flag,parentheses_map);
+                }
+            }
+
+        }
+
+    }
+    
+
+     (flag,parentheses_map)
 }
