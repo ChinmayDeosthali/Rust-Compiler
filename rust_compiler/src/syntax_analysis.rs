@@ -40,7 +40,6 @@ pub fn slice_the_tokens(tokens: Vec<std::string::String>) -> bool {
 //                           return-type function-name (parameter type parameter variable, ...) {}                                     *
 // *************************************************************************************************************************************
 fn check_function(sliced_tokens: Vec<std::string::String>) -> bool {
-    println!("\n{:?}\n", sliced_tokens);
     // check if the last element contains "{". If it does then check if second last element contains ")". If it does the make check_brackets_flag as true.
     // if the last element does not contain "{", then check if it contains ")". If it does then make check_brackets_flag as true.
     let mut check_brackets_flag = false;
@@ -72,9 +71,64 @@ fn check_function(sliced_tokens: Vec<std::string::String>) -> bool {
         }
     }
 
-    // At the end we will check if all the flags (return_type_flag, function_name_flag, function_parameter_flag) are true or not. If they are true then the
+    // check parameters starts from here
+    let mut index = 3;
+    let mut parameter_string = String::new();
+    if brackets == "{" {
+        while index != sliced_tokens.len() - 2 {
+            if !parameter_string.is_empty() {
+                parameter_string.push_str(" ");
+            }
+            parameter_string.push_str(&sliced_tokens[index]);
+            index = index + 1;
+        }
+    }
+    else if brackets == ")"{
+        while index != sliced_tokens.len() - 1 {
+            if !parameter_string.is_empty() {
+                parameter_string.push_str(" ");
+            }
+            parameter_string.push_str(&sliced_tokens[index]);
+            index = index + 1;
+        }
+    }
+    
+    // Splitting the parameters based on "," and then doing the parameters check on them.
+    let split_parameters_vector: Vec<&str> = parameter_string.split(",").collect();
+    let mut function_parameter_flag = false;
+    // println!("len:{},{:?}", split_parameters_vector.len(), split_parameters_vector);
+
+    if split_parameters_vector.len() > 1 {
+        for each_param in &split_parameters_vector {
+            let split_parameter: Vec<&str> = each_param.trim().split(" ").collect();
+            let range = 0..split_parameter.len();
+            for index in range {
+                if index <= split_parameter.len() - 2 {
+                    let each_word = split_parameter[index];
+                    match each_word {
+                        "int" => println!("\nint data-type matched\n"),
+
+                        "char" => println!("\nchar data-type matched\n"),
+
+                        "float" => println!("\nfloat data-type matched\n"),
+
+                        "double" => println!("\ndouble data-type matched\n"),
+
+                        _ => continue
+                    }
+                }
+            }
+        }
+        function_parameter_flag = true;
+    }
+    else {
+        println!("\nNo parameters inside function declaration...\n");
+        function_parameter_flag = true;
+    }
+
+    // At the end we will check if all the flags (check_brackets_flag, function_name_flag, function_parameter_flag) are true or not. If they are true then the
     // whole function will return value as true otherwise false.       
-    if check_brackets_flag && function_name_flag {
+    if check_brackets_flag && function_name_flag && function_parameter_flag {
         return true;
     }
     println!("\nFunction name should be of pattern: return-type function-name (parameter-type parameter-name, ...) \n");

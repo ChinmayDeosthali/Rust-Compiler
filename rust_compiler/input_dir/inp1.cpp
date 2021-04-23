@@ -1,4 +1,4 @@
-int print (int in, string msg) 
+int print (int in, char msg) 
 {
     if (in < 0) {
         strcpy (msg, " The sum is below zero!");
@@ -16,7 +16,7 @@ int print (int in, string msg)
 int main()
 {
     int a, b, c;
-    string msg;
+    char msg;
     scanf("%d%d%f", &a, &b, &c);
     return print(a, msg);
    

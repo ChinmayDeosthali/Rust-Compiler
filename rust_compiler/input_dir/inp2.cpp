@@ -1,4 +1,4 @@
-int compare (int a, int b, string msg)
+int compare (int a, int b, char msg)
 {
     
     if (a < b) {
@@ -11,7 +11,7 @@ int compare (int a, int b, string msg)
 
 void main() {
     int a, b;
-    string msg;
+    char msg;
     scanf("%d%d", &a, &b);
     compare(a,b,msg);
 }
