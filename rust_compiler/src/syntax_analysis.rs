@@ -97,7 +97,7 @@ fn check_function(sliced_tokens: Vec<std::string::String>) -> bool {
     
     // Splitting the parameters based on "," and then doing the parameters check on them.
     let split_parameters_vector: Vec<&str> = parameter_string.split(",").collect();
-    let mut function_parameter_flag = false;
+    let mut _function_parameter_flag = false;
     // println!("len:{},{:?}", split_parameters_vector.len(), split_parameters_vector);
 
     if split_parameters_vector.len() > 1 {
@@ -108,29 +108,28 @@ fn check_function(sliced_tokens: Vec<std::string::String>) -> bool {
                 if index <= split_parameter.len() - 2 {
                     let each_word = split_parameter[index];
                     match each_word {
-                        "int" => println!("\nint data-type matched\n"),
+                        "int" => println!(),
 
-                        "char" => println!("\nchar data-type matched\n"),
+                        "char" => println!(),
 
-                        "float" => println!("\nfloat data-type matched\n"),
+                        "float" => println!(),
 
-                        "double" => println!("\ndouble data-type matched\n"),
+                        "double" => println!(),
 
                         _ => continue
                     }
                 }
             }
         }
-        function_parameter_flag = true;
+        _function_parameter_flag = true;
     }
     else {
-        println!("\nNo parameters inside function declaration...\n");
-        function_parameter_flag = true;
+        _function_parameter_flag = true;
     }
 
     // At the end we will check if all the flags (check_brackets_flag, function_name_flag, function_parameter_flag) are true or not. If they are true then the
     // whole function will return value as true otherwise false.       
-    if check_brackets_flag && function_name_flag && function_parameter_flag {
+    if check_brackets_flag && function_name_flag && _function_parameter_flag {
         return true;
     }
     println!("\nFunction name should be of pattern: return-type function-name (parameter-type parameter-name, ...) \n");

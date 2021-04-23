@@ -1,6 +1,5 @@
 int compare (int a, int b, char msg)
 {
-    
     if (a < b) {
         strcpy (msg, " a is less than b");
     }
