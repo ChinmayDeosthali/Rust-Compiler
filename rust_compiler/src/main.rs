@@ -1,6 +1,13 @@
+// Release 0.2 changes start
 mod lexical_analysis;
-mod syntax_analysis;
+// Release 0.2 changes end
 
+// Release 0.3 changes start
+mod syntax_analysis;
+// Release 0.3 changes end
+
+
+// Release 0.1 changes start
 use std::env;
 use std::fs::File;
 use std::io::prelude::*;
@@ -43,13 +50,11 @@ fn main() {
             // Release 0.2 changes end.
 
             // Release 0.3 changes start.   
-            // Check if Parentheses are balanced
             let (check_parentheses_flag,_parenthesis_map) = syntax_analysis::check_if_parentheses_are_balanced(tokens.clone());
 
             if !check_parentheses_flag{
                 process::exit(0x0100);
             }
-
 
             let check_function_flag = syntax_analysis::slice_the_tokens(tokens.clone());
             
@@ -61,11 +66,10 @@ fn main() {
             let check_semi_colon_flag = syntax_analysis::check_semi_colon(tokens.clone());
             
             if !check_semi_colon_flag {
-                println!("\nsemi_colon_flag:Compilation Error.Exiting the program...");
                 process::exit(0x0100);
             }
          
-            println!("Sending file to parse tree..");
+            println!("\nSending file to parse tree..\n");
             // Resease 0.3 changes end.
             
         } else {
@@ -76,3 +80,4 @@ fn main() {
         println!("Please provide a file name!");
     }
 }
+// Release 0.1 changes end
