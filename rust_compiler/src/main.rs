@@ -59,7 +59,7 @@ fn main() {
             let check_function_flag = syntax_analysis::slice_the_tokens(tokens.clone());
             
             if !check_function_flag {
-                println!("\nfunction_flag:Compilation Error.Exiting the program...\n");
+                println!("\nFunction_Declaration:Compilation Error.Exiting the program...\n");
                 process::exit(0x0100);
             }
             
