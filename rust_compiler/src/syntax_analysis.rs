@@ -97,39 +97,59 @@ fn check_function(sliced_tokens: Vec<std::string::String>) -> bool {
     
     // Splitting the parameters based on "," and then doing the parameters check on them.
     let split_parameters_vector: Vec<&str> = parameter_string.split(",").collect();
-    let mut _function_parameter_flag = false;
-    // println!("len:{},{:?}", split_parameters_vector.len(), split_parameters_vector);
+    let mut function_parameter_flag = false;
+    println!("\nlen:{},{:?}\n", split_parameters_vector.len(), split_parameters_vector);
 
+    // if there are no arguments passed in function then make the function_parameter_flag as true. Otherwise make the following checking
     if split_parameters_vector.len() > 1 {
-        for each_param in &split_parameters_vector {
+        for (index, each_param) in split_parameters_vector.iter().enumerate() {
+            // split the parameters based on space
             let split_parameter: Vec<&str> = each_param.trim().split(" ").collect();
-            let range = 0..split_parameter.len();
-            for index in range {
-                if index <= split_parameter.len() - 2 {
-                    let each_word = split_parameter[index];
-                    match each_word {
-                        "int" => println!(),
-
-                        "char" => println!(),
-
-                        "float" => println!(),
-
-                        "double" => println!(),
-
-                        _ => continue
+            let len_of_split_parameter = split_parameter.len();
+            match len_of_split_parameter {
+                1 => if index == 0 {
+                        println!("\nIncorrect initialization of the arguments in function.\n");
+                        function_parameter_flag = false;
+                        break;
+                    } else {
+                        let param_to_check = split_parameter[0];
+                        println!("{}", param_to_check);
+                        // check if the split_parameter is not any of the keywords: int, char, float, double, string. also, check if it follows pattern [a-zA-Z]
+                        if param_to_check != "int" || param_to_check != "char" || param_to_check != "float" || param_to_check != "double" || param_to_check != "string" {
+                            if param_to_check.chars().all(|x| x.is_ascii_lowercase()) || param_to_check.chars().all(|x| x.is_ascii_uppercase()) {
+                                println!("\nsatisfied!\n");
+                                function_parameter_flag = true;
+                            } else {
+                                println!("\nParameter is not following the pattern [a-zA-Z]. (Note: Keywords int, float, char, double, string are not allowed.)\n");
+                                function_parameter_flag = false;
+                                break;
+                            }
+                        }
                     }
-                }
+                    // for all the other conditions do the normal checking that the arguments have followed the correct way of parameter initialization
+                2 => if split_parameter[0] == "int" || split_parameter[0] == "char" || split_parameter[0] == "float" || split_parameter[0] == "double" || split_parameter[0] == "string" {
+                        let next_parameter_to_check = split_parameter[1];
+                        if next_parameter_to_check.chars().all(|x| x.is_ascii_lowercase()) || next_parameter_to_check.chars().all(|x| x.is_ascii_uppercase()) {
+                            println!("\nsatisfied!\n");
+                            function_parameter_flag = true;
+                        } else {
+                            println!("\nParameter is not following the pattern [a-zA-Z]. (Note: Keywords int, float, char, double, string are not allowed.)\n");
+                            function_parameter_flag = false;
+                            break;
+                        }
+                    }
+                    // default case
+                    _ => break
             }
         }
-        _function_parameter_flag = true;
     }
     else {
-        _function_parameter_flag = true;
+        function_parameter_flag = true;
     }
 
     // At the end we will check if all the flags (check_brackets_flag, function_name_flag, function_parameter_flag) are true or not. If they are true then the
     // whole function will return value as true otherwise false.       
-    if check_brackets_flag && function_name_flag && _function_parameter_flag {
+    if check_brackets_flag && function_name_flag && function_parameter_flag {
         return true;
     }
     println!("\nFunction name should be of pattern: return-type function-name (parameter-type parameter-name, ...) \n");
@@ -235,7 +255,5 @@ pub fn check_if_parentheses_are_balanced(tokens: Vec<String>) -> (bool,HashMap<u
         }
 
     }
-    
-
      (flag,parentheses_map)
 }
