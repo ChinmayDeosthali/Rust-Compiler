@@ -125,25 +125,6 @@ fn check_function(sliced_tokens: Vec<std::string::String>) -> bool {
                     function_parameter_flag = false;
                     break;
                 }
-                // 1 => if index == 0 {
-                //         println!("\nIncorrect initialization of the arguments in function.\n");
-                //         function_parameter_flag = false;
-                //         break;
-                //     } else {
-                //         let param_to_check = split_parameter[0];
-                //         println!("{}", param_to_check);
-                //         // check if the split_parameter is not any of the keywords: int, char, float, double, string. also, check if it follows pattern [a-zA-Z]
-                //         if param_to_check != "int" || param_to_check != "char" || param_to_check != "float" || param_to_check != "double" || param_to_check != "string" {
-                //             if param_to_check.chars().all(|x| x.is_ascii_lowercase()) || param_to_check.chars().all(|x| x.is_ascii_uppercase()) {
-                //                 println!("\nsatisfied!\n");
-                //                 function_parameter_flag = true;
-                //             } else {
-                //                 println!("\nParameter is not following the pattern [a-zA-Z]. (Note: Keywords int, float, char, double, string are not allowed.)\n");
-                //                 function_parameter_flag = false;
-                //                 break;
-                //             }
-                //         }
-                //     }
             }
         }
     }
@@ -261,3 +242,209 @@ pub fn check_if_parentheses_are_balanced(tokens: Vec<String>) -> (bool,HashMap<u
     }
      (flag,parentheses_map)
 }
+
+// *************************************************************************************************************************************
+// Author: Elle Zeeman                                                                                                                 *               
+// Project: Designing a compiler with Rust                                                                                             *
+// Code Snippet Description: function check_if will accept tokenized vector from the syntax analysis and check if the function         *
+//                           file uses proper syntax for if statements                                                                 *
+// *************************************************************************************************************************************
+
+
+pub fn check_if_statement (tokens: Vec<String>)  {
+
+    let mut if_statement:HashMap<usize,usize> = HashMap::new();
+    let mut start ;
+    let mut i = start;
+    let mut end;
+    
+    let mut parenthesisMap;
+    for i in start..end 
+    {
+        if tokens[i] == "if"
+        {
+            
+            if i < (end - 2)
+            {
+                if tokens[i + 1] == "("
+                {
+                                
+                    let mut closeBracket = i + 5;
+                    if i < (end - 1)
+                    {
+                        
+                        let mut it = if_statement.iter().find_map(i+1);
+                    
+
+                        if it->second
+                        {
+                            
+                            closeBracket = it->second;
+                        }
+                    }
+                    
+
+                    if tokens[closeBracket + 1] == "{" && (closeBracket + 1) < (end - 1)
+                    {
+                        
+
+                        if (closeBracket + 1) < end - 1
+                        {
+                            let mut it = if_statement.iter().find_map(i+1);
+                            let closeParNum = it->second; 
+
+                            
+                            string op = checkIfElseSyntax(closeBracket + 2, closeParNum, tokens, parenthesisMap);
+                            
+                        }
+                    }
+                    else {
+                        println!("Syntax error: Missing {{") ;
+                    }
+                    
+                        
+                }
+                else
+                {
+                    println!("Syntax error: Missing (") ;
+                }
+                    
+            }
+            else
+            {
+                println!("Syntax error") ;
+            }
+                
+        }
+        else if tokens[i] == "else"
+        {
+            if tokens[i + 1] == "{"
+            {
+                let mut it = if_statement.iter().find_map(i+1);
+                let closeParNum = it->second;
+                string op = checkIfElseSyntax(i + 2, closeParNum, tokens, parenthesisMap);
+            }
+            else if tokens[i + 1] == "if"
+            {
+            }
+            else
+            {
+                println!("Syntax error: The else condition is invalid") ;
+            }
+                
+        }
+    }
+    println!("There are no errors") ;
+}
+
+// *************************************************************************************************************************************
+// Author: Elle Zeeman                                                                                                                 *               
+// Project: Designing a compiler with Rust                                                                                             *
+// Code Snippet Description: function check_Conditional will accept tokenized vector from the syntax analysis and check if the function*
+//                           file uses proper syntax for conditional statements                                                        *
+// *************************************************************************************************************************************
+
+    
+pub fn  check_Conditional( tokens:Vec<std::string::String> ) -> bool
+{
+    
+    let mut start = 0;
+    let mut a = start;
+    let mut end;
+
+    if (end - start) == 3
+    { 
+        for  a in start..end
+        {
+            if (a == start) || (a == end - 1)
+            {
+                let checkChar: String = tokens[a];
+                // let mut k;
+                //let numChar = checkChar.len();
+                // for  k in 0..checkChar.len()
+                // {
+                    
+                //     if (((checkChar[k]) >= 65) && ((checkChar[k]) <= 90)) || (((checkChar[k]) >= 97) && ((checkChar[k] <= 122)))
+                //     {
+                //         continue;
+                //     }
+                //     else
+                //     {
+                //         return false;
+                //     }
+                // }
+                for each_character in checkChar.chars() {
+                    if each_character.is_ascii_lowercase() {
+                       
+                    }
+                    else if each_character.is_ascii_uppercase() {
+                        
+                    }
+                    else {
+                        return false;
+                       
+                    }
+                }
+            }
+            else
+            {
+                if (tokens[a] != "<") && (tokens[a] != ">")
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    else if (end - start) == 4
+    {
+        for  a in start..end
+        {
+            if (a == start) || (a == end - 1)
+            {
+                let checkChar: String = tokens[a];
+                // for  k in 0.. checkChar.len()
+                // {
+                //     if (((checkChar[k]) >= 65) && ((checkChar[k]) <= 90)) || (((checkChar[k]) >= 97) && ((checkChar[k] <= 122)))
+                //     {
+                //         continue;
+                //     }
+                //     else
+                //     {
+                //         return false;
+                //     }
+                // }
+                for each_character in checkChar.chars() {
+                    if each_character.is_ascii_lowercase() {
+                       
+                    }
+                    else if each_character.is_ascii_uppercase() {
+                        
+                    }
+                    else {
+                        return false;
+                       
+                    }
+                }
+            }
+            else if a == 1
+            {
+                if (tokens[a] != "<") && (tokens[a] != ">") && (tokens[a] != "=") && (tokens[a] != "!")
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if tokens[a] != "="
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+    
+    
+    
+    
