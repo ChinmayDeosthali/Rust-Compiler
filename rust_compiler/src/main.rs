@@ -12,6 +12,7 @@ use std::env;
 use std::fs::File;
 use std::io::prelude::*;
 use std::process;
+use std::io::ErrorKind;
 
 // *************************************************************************************************************************************
 // Author: Elle Zeeman                                                                                                                 *               
@@ -32,16 +33,40 @@ fn main() {
         if args.len() == 2 {
             let mut file = match File::open(&args[1]) {
                 Ok(file) => file,
-                Err(why) => panic!("\n\n{}:{}\n\n", why, &args[1]),
+
+                 //changes for github issue #4 start- replace panic!()
+                Err(why) => match why.kind() {
+                    ErrorKind::NotFound => {
+                        eprintln!("File not found");
+                        process::exit(0);
+                    }
+                    ErrorKind::PermissionDenied => {
+                        eprintln!("File permission denied");
+                        process::exit(0);
+                    }
+                    _ => {
+                        eprintln!("other errors {}", why);
+                        process::exit(0);
+                    }
+                },
             };
  
+        //changes for github issue #4 end
              let mut contents = String::new();
             
             
 
             match file.read_to_string(&mut contents) {
                 Ok(_) => println!("\n\nFile Contents\n\n{}", contents),
-                Err(why) => panic!("\n\nCould not read the contents of the file at path {} due to {}\n\n", &args[1], why),
+
+            //changes for github issue #4 start - replace panic!()
+                Err(why) => match why.kind() {
+                    _ => {
+                        eprintln!("other errors {}", why);
+                        process::exit(0);
+                    }
+                },
+                //changes for github issue #4 end
             };
 
             // Release 0.2 changes start.
