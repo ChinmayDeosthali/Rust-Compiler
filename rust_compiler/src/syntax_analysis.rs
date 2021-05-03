@@ -251,91 +251,91 @@ pub fn check_if_parentheses_are_balanced(tokens: Vec<String>) -> (bool,HashMap<u
 // *************************************************************************************************************************************
 
 
-pub fn check_if_statement (tokens: Vec<String>)  {
+// pub fn check_if_statement (tokens: Vec<String>)  {
 
-    let mut if_statement:HashMap<usize,usize> = HashMap::new();
-    let mut start ;
-    let mut i = start;
-    let mut end;
+//     let mut if_statement:HashMap<usize,usize> = HashMap::new();
+//     let mut start ;
+//     let mut i = start;
+//     let mut end;
     
-    let mut parenthesisMap;
-    for i in start..end 
-    {
-        if tokens[i] == "if"
-        {
+//     let mut parenthesisMap;
+//     for i in start..end 
+//     {
+//         if tokens[i] == "if"
+//         {
             
-            if i < (end - 2)
-            {
-                if tokens[i + 1] == "("
-                {
+//             if i < (end - 2)
+//             {
+//                 if tokens[i + 1] == "("
+//                 {
                                 
-                    let mut closeBracket = i + 5;
-                    if i < (end - 1)
-                    {
+//                     let mut closeBracket = i + 5;
+//                     if i < (end - 1)
+//                     {
                         
-                        let mut it = if_statement.iter().find_map(i+1);
+//                         let mut it = if_statement.iter().find_map(i+1);
                     
 
-                        if it->second
-                        {
+//                         if it->second
+//                         {
                             
-                            closeBracket = it->second;
-                        }
-                    }
+//                             closeBracket = it->second;
+//                         }
+//                     }
                     
 
-                    if tokens[closeBracket + 1] == "{" && (closeBracket + 1) < (end - 1)
-                    {
+//                     if tokens[closeBracket + 1] == "{" && (closeBracket + 1) < (end - 1)
+//                     {
                         
 
-                        if (closeBracket + 1) < end - 1
-                        {
-                            let mut it = if_statement.iter().find_map(i+1);
-                            let closeParNum = it->second; 
+//                         if (closeBracket + 1) < end - 1
+//                         {
+//                             let mut it = if_statement.iter().find_map(i+1);
+//                             let closeParNum = it->second; 
 
                             
-                            string op = checkIfElseSyntax(closeBracket + 2, closeParNum, tokens, parenthesisMap);
+//                             string op = checkIfElseSyntax(closeBracket + 2, closeParNum, tokens, parenthesisMap);
                             
-                        }
-                    }
-                    else {
-                        println!("Syntax error: Missing {{") ;
-                    }
+//                         }
+//                     }
+//                     else {
+//                         println!("Syntax error: Missing {{") ;
+//                     }
                     
                         
-                }
-                else
-                {
-                    println!("Syntax error: Missing (") ;
-                }
+//                 }
+//                 else
+//                 {
+//                     println!("Syntax error: Missing (") ;
+//                 }
                     
-            }
-            else
-            {
-                println!("Syntax error") ;
-            }
+//             }
+//             else
+//             {
+//                 println!("Syntax error") ;
+//             }
                 
-        }
-        else if tokens[i] == "else"
-        {
-            if tokens[i + 1] == "{"
-            {
-                let mut it = if_statement.iter().find_map(i+1);
-                let closeParNum = it->second;
-                string op = checkIfElseSyntax(i + 2, closeParNum, tokens, parenthesisMap);
-            }
-            else if tokens[i + 1] == "if"
-            {
-            }
-            else
-            {
-                println!("Syntax error: The else condition is invalid") ;
-            }
+//         }
+//         else if tokens[i] == "else"
+//         {
+//             if tokens[i + 1] == "{"
+//             {
+//                 let mut it = if_statement.iter().find_map(i+1);
+//                 let closeParNum = it->second;
+//                 string op = checkIfElseSyntax(i + 2, closeParNum, tokens, parenthesisMap);
+//             }
+//             else if tokens[i + 1] == "if"
+//             {
+//             }
+//             else
+//             {
+//                 println!("Syntax error: The else condition is invalid") ;
+//             }
                 
-        }
-    }
-    println!("There are no errors") ;
-}
+//         }
+//     }
+//     println!("There are no errors") ;
+// }
 
 // *************************************************************************************************************************************
 // Author: Elle Zeeman                                                                                                                 *               
@@ -345,105 +345,105 @@ pub fn check_if_statement (tokens: Vec<String>)  {
 // *************************************************************************************************************************************
 
     
-pub fn  check_Conditional( tokens:Vec<std::string::String> ) -> bool
-{
+// pub fn  check_Conditional( tokens:Vec<std::string::String> ) -> bool
+// {
     
-    let mut start = 0;
-    let mut a = start;
-    let mut end;
+//     let  start = 0;
+//     // let  a = start;
+//     let  end =tokens.len();
 
-    if (end - start) == 3
-    { 
-        for  a in start..end
-        {
-            if (a == start) || (a == end - 1)
-            {
-                let checkChar: String = tokens[a];
-                // let mut k;
-                //let numChar = checkChar.len();
-                // for  k in 0..checkChar.len()
-                // {
+//     if (end - start) == 3
+//     { 
+//         for  a in start..end
+//         {
+//             if (a == start) || (a == end - 1)
+//             {
+//                 let checkChar: String = tokens[a];
+//                 // let mut k;
+//                 //let numChar = checkChar.len();
+//                 // for  k in 0..checkChar.len()
+//                 // {
                     
-                //     if (((checkChar[k]) >= 65) && ((checkChar[k]) <= 90)) || (((checkChar[k]) >= 97) && ((checkChar[k] <= 122)))
-                //     {
-                //         continue;
-                //     }
-                //     else
-                //     {
-                //         return false;
-                //     }
-                // }
-                for each_character in checkChar.chars() {
-                    if each_character.is_ascii_lowercase() {
+//                 //     if (((checkChar[k]) >= 65) && ((checkChar[k]) <= 90)) || (((checkChar[k]) >= 97) && ((checkChar[k] <= 122)))
+//                 //     {
+//                 //         continue;
+//                 //     }
+//                 //     else
+//                 //     {
+//                 //         return false;
+//                 //     }
+//                 // }
+//                 for each_character in checkChar.chars() {
+//                     if each_character.is_ascii_lowercase() {
                        
-                    }
-                    else if each_character.is_ascii_uppercase() {
+//                     }
+//                     else if each_character.is_ascii_uppercase() {
                         
-                    }
-                    else {
-                        return false;
+//                     }
+//                     else {
+//                         return false;
                        
-                    }
-                }
-            }
-            else
-            {
-                if (tokens[a] != "<") && (tokens[a] != ">")
-                {
-                    return false;
-                }
-            }
-        }
-    }
-    else if (end - start) == 4
-    {
-        for  a in start..end
-        {
-            if (a == start) || (a == end - 1)
-            {
-                let checkChar: String = tokens[a];
-                // for  k in 0.. checkChar.len()
-                // {
-                //     if (((checkChar[k]) >= 65) && ((checkChar[k]) <= 90)) || (((checkChar[k]) >= 97) && ((checkChar[k] <= 122)))
-                //     {
-                //         continue;
-                //     }
-                //     else
-                //     {
-                //         return false;
-                //     }
-                // }
-                for each_character in checkChar.chars() {
-                    if each_character.is_ascii_lowercase() {
+//                     }
+//                 }
+//             }
+//             else
+//             {
+//                 if (tokens[a] != "<") && (tokens[a] != ">")
+//                 {
+//                     return false;
+//                 }
+//             }
+//         }
+//     }
+//     else if (end - start) == 4
+//     {
+//         for  a in start..end
+//         {
+//             if (a == start) || (a == end - 1)
+//             {
+//                 let checkChar: String = tokens[a];
+//                 // for  k in 0.. checkChar.len()
+//                 // {
+//                 //     if (((checkChar[k]) >= 65) && ((checkChar[k]) <= 90)) || (((checkChar[k]) >= 97) && ((checkChar[k] <= 122)))
+//                 //     {
+//                 //         continue;
+//                 //     }
+//                 //     else
+//                 //     {
+//                 //         return false;
+//                 //     }
+//                 // }
+//                 for each_character in checkChar.chars() {
+//                     if each_character.is_ascii_lowercase() {
                        
-                    }
-                    else if each_character.is_ascii_uppercase() {
+//                     }
+//                     else if each_character.is_ascii_uppercase() {
                         
-                    }
-                    else {
-                        return false;
+//                     }
+//                     else {
+//                         return false;
                        
-                    }
-                }
-            }
-            else if a == 1
-            {
-                if (tokens[a] != "<") && (tokens[a] != ">") && (tokens[a] != "=") && (tokens[a] != "!")
-                {
-                    return false;
-                }
-            }
-            else
-            {
-                if tokens[a] != "="
-                {
-                    return false;
-                }
-            }
-        }
-    }
-    return true;
-}
+//                     }
+//                 }
+//             }
+//             else if a == 1
+//             {
+//                 if (tokens[a] != "<") && (tokens[a] != ">") && (tokens[a] != "=") && (tokens[a] != "!")
+//                 {
+//                     return false;
+//                 }
+//             }
+//             else
+//             {
+//                 if tokens[a] != "="
+//                 {
+//                     return false;
+//                 }
+//             }
+//         }
+//     }
+//     return true;
+// }
     
     
     
