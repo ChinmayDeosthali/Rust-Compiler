@@ -6,12 +6,16 @@ mod lexical_analysis;
 mod syntax_analysis;
 // Release 0.3 changes end
 
+mod parse_tree;
+
 
 // Release 0.1 changes start
 use std::env;
 use std::fs::File;
 use std::io::prelude::*;
 use std::process;
+use std::collections::HashMap;
+
 
 // *************************************************************************************************************************************
 // Author: Elle Zeeman                                                                                                                 *               
@@ -50,7 +54,7 @@ fn main() {
             // Release 0.2 changes end.
 
             // Release 0.3 changes start.   
-            let (check_parentheses_flag,_parenthesis_map) = syntax_analysis::check_if_parentheses_are_balanced(tokens.clone());
+            let (check_parentheses_flag, parentheses_map) = syntax_analysis::check_if_parentheses_are_balanced(tokens.clone());
 
             if !check_parentheses_flag{
                 process::exit(0x0100);
@@ -69,8 +73,13 @@ fn main() {
                 process::exit(0x0100);
             }
          
-            println!("\nSending file to parse tree..\n");
             // Resease 0.3 changes end.
+
+            // Release 0.4 changes start
+            println!("\nParse Tree :\n");
+            let var_type_map = HashMap::new();
+            parse_tree::parse_tree(0,tokens.len(),tokens.clone(), parentheses_map, var_type_map, "-".to_string());
+            // Release 0.4 changes end
             
         } else {
             println!("More than required arguments provided:{:?}",args);
